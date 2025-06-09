@@ -1,0 +1,16 @@
+{
+	"name": "BabyNamesSQL",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BarretSQLDemo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Names"
+		}
+	}
+}
