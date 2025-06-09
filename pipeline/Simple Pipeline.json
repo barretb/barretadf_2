@@ -148,7 +148,17 @@
 												"physicalType": "int"
 											}
 										},
-										null
+										{
+											"source": {
+												"name": "Year",
+												"type": "String"
+											},
+											"sink": {
+												"name": "Year",
+												"type": "Int32",
+												"physicalType": "int"
+											}
+										}
 									],
 									"typeConversion": true,
 									"typeConversionSettings": {
