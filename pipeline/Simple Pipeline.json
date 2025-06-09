@@ -89,12 +89,6 @@
 							"typeProperties": {
 								"source": {
 									"type": "DelimitedTextSource",
-									"additionalColumns": [
-										{
-											"name": "Year",
-											"value": "@replace(replace(item().name, 'yob', ''), '.txt', '')"
-										}
-									],
 									"storeSettings": {
 										"type": "AzureBlobStorageReadSettings",
 										"recursive": true,
@@ -148,13 +142,7 @@
 												"physicalType": "int"
 											}
 										},
-										{
-											"sink": {
-												"name": "Year",
-												"type": "Int32",
-												"physicalType": "int"
-											}
-										}
+										null
 									],
 									"typeConversion": true,
 									"typeConversionSettings": {
