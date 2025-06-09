@@ -1,0 +1,170 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Airline_Airline",
+						"type": "DatasetReference"
+					},
+					"name": "Airlines"
+				},
+				{
+					"dataset": {
+						"referenceName": "Airline_Airport",
+						"type": "DatasetReference"
+					},
+					"name": "Airports"
+				},
+				{
+					"dataset": {
+						"referenceName": "Airline_Flights",
+						"type": "DatasetReference"
+					},
+					"name": "Flights"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          IATA_CODE as string,",
+				"          AIRLINE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Airlines",
+				"source(output(",
+				"          IATA_CODE as string,",
+				"          AIRPORT as string,",
+				"          CITY as string,",
+				"          STATE as string,",
+				"          COUNTRY as string,",
+				"          LATITUDE as string,",
+				"          LONGITUDE as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> Airports",
+				"source(output(",
+				"          YEAR as string,",
+				"          MONTH as string,",
+				"          DAY as string,",
+				"          DAY_OF_WEEK as string,",
+				"          AIRLINE as string,",
+				"          FLIGHT_NUMBER as string,",
+				"          TAIL_NUMBER as string,",
+				"          ORIGIN_AIRPORT as string,",
+				"          DESTINATION_AIRPORT as string,",
+				"          SCHEDULED_DEPARTURE as string,",
+				"          DEPARTURE_TIME as string,",
+				"          DEPARTURE_DELAY as string,",
+				"          TAXI_OUT as string,",
+				"          WHEELS_OFF as string,",
+				"          SCHEDULED_TIME as string,",
+				"          ELAPSED_TIME as string,",
+				"          AIR_TIME as string,",
+				"          DISTANCE as string,",
+				"          WHEELS_ON as string,",
+				"          TAXI_IN as string,",
+				"          SCHEDULED_ARRIVAL as string,",
+				"          ARRIVAL_TIME as string,",
+				"          ARRIVAL_DELAY as string,",
+				"          DIVERTED as string,",
+				"          CANCELLED as string,",
+				"          CANCELLATION_REASON as string,",
+				"          AIR_SYSTEM_DELAY as string,",
+				"          SECURITY_DELAY as string,",
+				"          AIRLINE_DELAY as string,",
+				"          LATE_AIRCRAFT_DELAY as string,",
+				"          WEATHER_DELAY as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     limit: 1000,",
+				"     ignoreNoFilesFound: false) ~> Flights",
+				"Flights, Airlines join(Flights@AIRLINE == IATA_CODE,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1, Airports join(ORIGIN_AIRPORT == Airports@IATA_CODE,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"join2, Airports join(DESTINATION_AIRPORT == Airports@IATA_CODE,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3 select(mapColumn(",
+				"          YEAR,",
+				"          MONTH,",
+				"          DAY,",
+				"          DAY_OF_WEEK,",
+				"          AIRLINE = Flights@AIRLINE,",
+				"          FLIGHT_NUMBER,",
+				"          TAIL_NUMBER,",
+				"          ORIGIN_AIRPORT,",
+				"          DESTINATION_AIRPORT,",
+				"          SCHEDULED_DEPARTURE,",
+				"          DEPARTURE_TIME,",
+				"          DEPARTURE_DELAY,",
+				"          TAXI_OUT,",
+				"          WHEELS_OFF,",
+				"          SCHEDULED_TIME,",
+				"          ELAPSED_TIME,",
+				"          AIR_TIME,",
+				"          DISTANCE,",
+				"          WHEELS_ON,",
+				"          TAXI_IN,",
+				"          SCHEDULED_ARRIVAL,",
+				"          ARRIVAL_TIME,",
+				"          ARRIVAL_DELAY,",
+				"          DIVERTED,",
+				"          CANCELLED,",
+				"          CANCELLATION_REASON,",
+				"          AIR_SYSTEM_DELAY,",
+				"          SECURITY_DELAY,",
+				"          AIRLINE_DELAY,",
+				"          LATE_AIRCRAFT_DELAY,",
+				"          WEATHER_DELAY,",
+				"          IATA_CODE = Airlines@IATA_CODE,",
+				"          AIRLINE_NAME = Airlines@AIRLINE,",
+				"          IATA_CODE = Airports@IATA_CODE,",
+				"          AIRPORT_DEP = Airports@AIRPORT,",
+				"          CITY = Airports@CITY,",
+				"          STATE = Airports@STATE,",
+				"          COUNTRY = Airports@COUNTRY,",
+				"          LATITUDE = Airports@LATITUDE,",
+				"          LONGITUDE = Airports@LONGITUDE,",
+				"          IATA_CODE = Airports@IATA_CODE,",
+				"          AIRPORT_ARR = Airports@AIRPORT,",
+				"          CITY = Airports@CITY,",
+				"          STATE = Airports@STATE,",
+				"          COUNTRY = Airports@COUNTRY,",
+				"          LATITUDE = Airports@LATITUDE,",
+				"          LONGITUDE = Airports@LONGITUDE",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
+			]
+		}
+	}
+}
