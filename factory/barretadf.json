@@ -1,0 +1,9 @@
+{
+	"name": "barretadf",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6eebaa06-69f6-480f-9623-4471ecfd8d49",
+		"tenantId": "29b55ae2-4dfc-4db7-8f25-1c38d7063df9"
+	}
+}
