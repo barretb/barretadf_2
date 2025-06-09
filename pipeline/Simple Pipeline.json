@@ -77,6 +77,7 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
+					"batchCount": 10,
 					"activities": [
 						{
 							"name": "Copy data1",
