@@ -1,0 +1,84 @@
+{
+	"name": "StarTrek_Episodes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BarretBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "episodes.csv",
+				"container": "startrek"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Episode Number",
+				"type": "String"
+			},
+			{
+				"name": "Episode Name",
+				"type": "String"
+			},
+			{
+				"name": "Synopsis",
+				"type": "String"
+			},
+			{
+				"name": "Directed by",
+				"type": "String"
+			},
+			{
+				"name": "Written by",
+				"type": "String"
+			},
+			{
+				"name": "Stardate",
+				"type": "String"
+			},
+			{
+				"name": "Airdate",
+				"type": "String"
+			},
+			{
+				"name": "Runtime",
+				"type": "String"
+			},
+			{
+				"name": "Series",
+				"type": "String"
+			},
+			{
+				"name": "Tags",
+				"type": "String"
+			},
+			{
+				"name": "Watched?",
+				"type": "String"
+			},
+			{
+				"name": "Favorites",
+				"type": "String"
+			},
+			{
+				"name": "Impressions",
+				"type": "String"
+			},
+			{
+				"name": "Notes",
+				"type": "String"
+			},
+			{
+				"name": "Related Books",
+				"type": "String"
+			}
+		]
+	}
+}
