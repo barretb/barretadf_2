@@ -45,6 +45,9 @@
 				},
 				{
 					"name": "SelectToArrival"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -102,9 +105,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     limit: 1000,",
 				"     ignoreNoFilesFound: false) ~> Flights",
-				"Flights, Airlines join(Flights@AIRLINE == IATA_CODE,",
+				"filter1, Airlines join(Flights@AIRLINE == IATA_CODE,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -235,7 +237,8 @@
 				"          Destination_AIRPORT = AIRPORT",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> SelectToArrival"
+				"     skipDuplicateMapOutputs: true) ~> SelectToArrival",
+				"Flights filter(DESTINATION_AIRPORT == \"CMH\") ~> filter1"
 			]
 		}
 	}
