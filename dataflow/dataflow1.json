@@ -238,7 +238,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectToArrival",
-				"Flights filter(DESTINATION_AIRPORT == \"CMH\") ~> filter1"
+				"Flights filter(DESTINATION_AIRPORT == \"CMH\" || ORIGIN_AIRPORT == \"CMH\") ~> filter1"
 			]
 		}
 	}
