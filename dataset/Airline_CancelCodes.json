@@ -1,0 +1,32 @@
+{
+	"name": "Airline_CancelCodes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BarretBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "cancellation_codes.csv",
+				"container": "airlines"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "CANCELLATION_REASON",
+				"type": "String"
+			},
+			{
+				"name": "CANCELLATION_DESCRIPTION",
+				"type": "String"
+			}
+		]
+	}
+}
