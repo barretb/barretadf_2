@@ -24,6 +24,7 @@
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -101,7 +102,10 @@
 									"additionalColumns": [
 										{
 											"name": "Year",
-											"value": "@replace(replace(item().name, 'yob' ,'' ), '.txt','' )"
+											"value": {
+												"value": "@replace(replace(item().name, 'yob' ,'' ), '.txt','' )",
+												"type": "Expression"
+											}
 										}
 									],
 									"storeSettings": {
